@@ -1,4 +1,10 @@
 class User < ActiveRecord::Base
+    # relationship with articles
+    has_many :articles
+    
+    # action before save
+    before_save { self.email = email.downcase }
+    
     #username must be present and unique
     validates :username, 
         presence: true,
