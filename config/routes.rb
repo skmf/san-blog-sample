@@ -8,7 +8,14 @@
   
   get 'about', to: 'pages#about'
   
+  #created path
   resources :articles
+  
+  get 'signup', to: 'users#new'
+  
+  
+  # post 'users', to: 'users#create'
+  resources :users, except: [:new]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
