@@ -2,6 +2,7 @@ require 'test_helper'
 
 class CreateCategoriesTest < ActionDispatch::IntegrationTest
     
+    # --------------------------------------------------------------------------
     test "get new vategory form and create category" do
         
         # going to category path
@@ -23,6 +24,7 @@ class CreateCategoriesTest < ActionDispatch::IntegrationTest
          
     end
     
+    #--------------------------------------------------------------------------
     test "invalid category submission result in failure" do
    
             # going to category path
@@ -42,6 +44,14 @@ class CreateCategoriesTest < ActionDispatch::IntegrationTest
         # 
         assert_select 'h2.panel-title'
         assert_select 'div.panel-body'
+    end
+    
+    #--------------------------------------------------------------------------
+    test "should redirect create when admin not logged in" do
+       assert_no_difference "Category.count" do
+           post :create, category: { name: "sports" }
+       end
+       assert_redirected_to categories_path
     end
     
 end
